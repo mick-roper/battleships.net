@@ -9,11 +9,12 @@ namespace Battleship
 
         static void Main(string[] args)
         {
-            var wrapper = new ConsoleWrapper();
+            IRenderer renderer = new ConsoleRenderer(new DoubleBuffer(100, 50));
+            IInputHandler inputHandler = new ConsoleInputHandler();
 
             try
             {
-                var game = new Game(wrapper, wrapper);
+                var game = new Game(renderer, inputHandler);
 
                 Console.CancelKeyPress += (s, e) => { e.Cancel = true; game.Quit(); };
 
@@ -30,18 +31,18 @@ namespace Battleship
             }
             catch (Exception ex)
             {
-                wrapper.SetColour(ConsoleColor.Red);
+                Console.ForegroundColor = ConsoleColor.Red;
 
-                wrapper.Clear();
+                Console.Clear();
 
-                wrapper.SetPosition(0, 0);
+                Console.SetCursorPosition(0, 0);
 
-                wrapper.Draw("An unrecoverable error occured!!\n\n");
-                wrapper.Draw(ex.ToString());
+                Console.Write("An unrecoverable error occured!!\n\n");
+                Console.Write(ex);
 
-                wrapper.Draw("\n\nPress 'enter' key to exit...");
+                Console.Write("\n\nPress 'enter' key to exit...");
 
-                wrapper.ReadInput();
+                Console.ReadKey();
             }
         }
     }

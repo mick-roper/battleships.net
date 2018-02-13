@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Battleship.Scenes
 {
@@ -23,8 +24,6 @@ namespace Battleship.Scenes
 
         protected override void DrawScene(IRenderer renderer)
         {
-            renderer.Clear();
-
             DrawGrids(renderer);
 
             switch (state)
@@ -110,21 +109,47 @@ namespace Battleship.Scenes
 
         private void DrawGrids(IRenderer renderer)
         {
-            int x = 10, y = 7;
+            int x = 5, y = 5;
 
             renderer.SetColour(ConsoleColor.Cyan);
 
             renderer.SetPosition(x, y);
 
             // 1: draw player grid
-            renderer.Draw(player.MyGrid.ToString());
+            var buffer = new StringBuilder(10);
+            Grid grid = player.MyGrid;
+
+            for (int row = 0; row < grid.Height; row++)
+            {
+                for (int col = 0; col < grid.Width; col++)
+                {
+                    buffer.Append(player.MyGrid[row, col].Content);
+                }
+
+                renderer.Draw(buffer.ToString());
+                renderer.SetPosition(x++, y);
+
+                buffer.Clear();
+            }
 
             // 2: draw target grid
-            x = player.MyGrid.Width + 10;
-
+            x = grid.Width + 10;
             renderer.SetPosition(x, y);
 
-            renderer.Draw(player.TargetGrid.ToString());
+            grid = player.TargetGrid;
+
+            for (int row = 0; row < grid.Height; row++)
+            {
+                for (int col = 0; col < grid.Width; col++)
+                {
+                    buffer.Append(player.MyGrid[row, col].Content);
+                }
+
+                renderer.Draw(buffer.ToString());
+                renderer.SetPosition(x++, y);
+
+                buffer.Clear();
+            }
 
             renderer.ResetColour();
         }

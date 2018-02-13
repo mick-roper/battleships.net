@@ -11,7 +11,6 @@ namespace Battleship
         void ResetColour();
         void SetPosition(int x, int y);
         void Draw(string data);
-        void Clear();
         void Commit();
     }
 }

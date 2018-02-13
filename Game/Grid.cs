@@ -21,25 +21,13 @@ namespace Battleship
             }
         }
 
+        public Cell this[int row, int column]
+        {
+            get { return cells[column, row]; }
+        }
+
         public int Height => DIM;
         public int Width => DIM;
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder(DIM * DIM + DIM);
-
-            for (int x = 0; x < DIM; x++)
-            {
-                for (int y = 0; y < DIM; y++)
-                {
-                    sb.Append(cells[x, y].Content);
-                }
-
-                sb.Append('\n');
-            }
-
-            return sb.ToString();
-        }
 
         public class Cell
         {

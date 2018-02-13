@@ -18,7 +18,7 @@
 
         public void Draw(IRenderer renderer)
         {
-            renderer.SetMinBounds(0, 0);
+            renderer.SetPosition(0, 0);
 
             DrawBanner(renderer);
 
@@ -36,7 +36,7 @@
 
             renderer.Draw(banner);
 
-            renderer.SetMinBounds(0, y + 1);
+            renderer.SetPosition(0, y + 1);
         }
     }
 }
