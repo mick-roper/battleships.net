@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Battleship
 {
@@ -15,5 +13,6 @@ namespace Battleship
         void Draw(string data);
         void Clear();
         void SetMinBounds(int x, int y);
+        void Commit();
     }
 }

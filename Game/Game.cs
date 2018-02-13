@@ -1,7 +1,5 @@
 ﻿using Battleship.Scenes;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Battleship
 {
@@ -44,6 +42,8 @@ namespace Battleship
             currentScene.Update();
 
             currentScene.Draw(renderer);
+
+            renderer.Commit();
         }
 
         public void TransitionTo(Scene scene)

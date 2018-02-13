@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Battleship
 {
@@ -85,6 +83,11 @@ namespace Battleship
             {
                 Console.Write(character);
             }
+        }
+
+        public void Commit()
+        {
+            // todo: implement this better!
         }
     }
 }
