@@ -14,27 +14,31 @@ namespace Battleship.Scenes
             state = SceneState.DrawingBanner;
         }
 
-        public override void Draw()
+        public override void Draw(IRenderer renderer)
         {
             const string banner = "Please type your name";
 
             var x = (game.Columns / 2) - (banner.Length / 2);
             const int y = 2;
 
-            Console.SetCursorPosition(x, y);
+            renderer.ChangeCursorVisibility(false);
 
-            Console.Write(banner);
+            renderer.SetPosition(x, y);
 
-            Console.SetCursorPosition(x, y + 2);
+            renderer.Write(banner);
+
+            renderer.SetPosition(x, y + 2);
+
+            renderer.SetColour(ConsoleColor.Green);
 
             state = SceneState.WaitingForInput;
         }
 
-        public override void HandleInput()
+        public override void HandleInput(IInputHandler inputHandler)
         {
-            if (state > SceneState.DrawingBanner)
+            if (state == SceneState.WaitingForInput)
             {
-                playerName = Console.ReadLine();
+                playerName = inputHandler.ReadInput();
 
                 state = SceneState.ReadyForTransition;
             }

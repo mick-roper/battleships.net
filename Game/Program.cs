@@ -9,33 +9,37 @@ namespace Battleship
 
         static void Main(string[] args)
         {
+            var wrapper = new ConsoleWrapper();
+
             try
             {
-                using (var game = new Game())
+                var game = new Game(wrapper, wrapper);
+
+                game.Init();
+
+                while (game.State != Game.GameState.Exit)
                 {
-                    game.Init();
+                    game.Loop();
 
-                    while (game.State != Game.GameState.Exit)
-                    {
-                        game.Loop();
-
-                        Thread.Sleep(FRAME_DELAY);
-                    }
+                    Thread.Sleep(FRAME_DELAY);
                 }
+
+                game.Cleanup();
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                wrapper.SetColour(ConsoleColor.Red);
 
-                Console.Clear();
-                Console.SetCursorPosition(0, 0);
+                wrapper.Clear();
 
-                Console.Write("An unrecoverable error occured!!\n\n");
-                Console.Write(ex);
+                wrapper.SetPosition(0, 0);
 
-                Console.Write("\n\nPress any key to exit...");
+                wrapper.Write("An unrecoverable error occured!!\n\n");
+                wrapper.Write(ex.ToString());
 
-                Console.ReadKey();
+                wrapper.Write("\n\nPress 'enter' key to exit...");
+
+                wrapper.ReadInput();
             }
         }
     }

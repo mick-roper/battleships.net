@@ -13,20 +13,20 @@ namespace Battleship.Scenes
         {
         }
 
-        public override void Draw()
+        public override void Draw(IRenderer renderer)
         {
             drawCount += 1;
 
             const string banner = "Battleships!";
 
-            Console.CursorVisible = false;
+            renderer.ChangeCursorVisibility(false);
 
             var x = (game.Columns / 2) - (banner.Length / 2);
             const int y = 2;
 
-            Console.SetCursorPosition(x, y);
+            renderer.SetPosition(x, y);
 
-            Console.Write(banner);
+            renderer.Write(banner);
 
             if (drawCount >= MAX_DRAWS_BEFORE_TRANSITION) // draw the player select screen
             {
@@ -34,7 +34,7 @@ namespace Battleship.Scenes
             }
         }
 
-        public override void HandleInput()
+        public override void HandleInput(IInputHandler inputHandler)
         {
             // do nothing
         }

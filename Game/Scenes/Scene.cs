@@ -13,8 +13,8 @@ namespace Battleship.Scenes
             this.game = game;
         }
 
-        public abstract void HandleInput();
+        public abstract void HandleInput(IInputHandler inputHandler);
         public abstract void Update();
-        public abstract void Draw();
+        public abstract void Draw(IRenderer renderer);
     }
 }
