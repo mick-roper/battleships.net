@@ -16,9 +16,6 @@ namespace Battleship
         {
             this.renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
             this.inputHandler = inputHandler ?? throw new ArgumentNullException(nameof(inputHandler));
-
-            Rows = Console.WindowHeight;
-            Columns = Console.WindowWidth;
         }
 
         internal void Cleanup()
@@ -32,9 +29,6 @@ namespace Battleship
 
             State = GameState.Running;
         }
-
-        public int Rows { get; }
-        public int Columns { get; }
 
         public GameState State { get; private set; }
 

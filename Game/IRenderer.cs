@@ -6,11 +6,14 @@ namespace Battleship
 {
     interface IRenderer
     {
+        int Width { get; }
+        int Height { get; }
         void ChangeCursorVisibility(bool visible);
         void SetColour(ConsoleColor colour);
         void ResetColour();
         void SetPosition(int x, int y);
-        void Write(string data);
+        void Draw(string data);
         void Clear();
+        void SetMinBounds(int x, int y);
     }
 }

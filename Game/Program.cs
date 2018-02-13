@@ -34,10 +34,10 @@ namespace Battleship
 
                 wrapper.SetPosition(0, 0);
 
-                wrapper.Write("An unrecoverable error occured!!\n\n");
-                wrapper.Write(ex.ToString());
+                wrapper.Draw("An unrecoverable error occured!!\n\n");
+                wrapper.Draw(ex.ToString());
 
-                wrapper.Write("\n\nPress 'enter' key to exit...");
+                wrapper.Draw("\n\nPress 'enter' key to exit...");
 
                 wrapper.ReadInput();
             }

@@ -9,23 +9,23 @@ namespace Battleship.Scenes
         SceneState state;
         string playerName;
 
-        public PlayerConfigScene(Game game) : base(game)
+        public PlayerConfigScene(Game game) : base(game, "Player Setup")
         {
             state = SceneState.DrawingBanner;
         }
 
-        public override void Draw(IRenderer renderer)
+        protected override void DrawScene(IRenderer renderer)
         {
-            const string banner = "Please type your name";
+            const string header = "Please type your name";
 
-            var x = (game.Columns / 2) - (banner.Length / 2);
-            const int y = 2;
+            var x = (renderer.Width / 2) - (header.Length / 2);
+            int y = 2;
 
             renderer.ChangeCursorVisibility(false);
 
             renderer.SetPosition(x, y);
 
-            renderer.Write(banner);
+            renderer.Draw(header);
 
             renderer.SetPosition(x, y + 2);
 
