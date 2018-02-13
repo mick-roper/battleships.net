@@ -48,7 +48,7 @@ namespace Battleship.Scenes
             {
                 var player = new Player(playerName);
 
-                game.TransitionTo(new PlayScene(game, player));
+                game.TransitionTo(new GameSetupScene(game, player));
             }
         }
 

@@ -2,11 +2,11 @@
 
 namespace Battleship.Scenes
 {
-    class GameOverScene : Scene
+    class GameoverScene : Scene
     {
         readonly Player winner;
 
-        public GameOverScene(Game game, Player winner) : base(game, "Game over!")
+        public GameoverScene(Game game, Player winner) : base(game, "Game over!")
         {
             this.winner = winner ?? throw new ArgumentNullException(nameof(winner));
         }

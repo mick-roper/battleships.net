@@ -9,6 +9,7 @@ namespace Battleship
         readonly IInputHandler inputHandler;
 
         private Scene currentScene;
+        bool sceneTransitionThisLoop = false;
 
         public Game(IRenderer renderer, IInputHandler inputHandler)
         {
@@ -37,17 +38,24 @@ namespace Battleship
 
         internal void Loop()
         {
+            sceneTransitionThisLoop = false;
+
             currentScene.HandleInput(inputHandler);
 
             currentScene.Update();
 
-            currentScene.Draw(renderer);
+            if (!sceneTransitionThisLoop)
+            {
+                currentScene.Draw(renderer); 
+            }
 
             renderer.Commit();
         }
 
         public void TransitionTo(Scene scene)
         {
+            sceneTransitionThisLoop = true;
+
             currentScene = scene;
         }
 
