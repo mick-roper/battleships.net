@@ -48,7 +48,9 @@ namespace Battleship.Scenes
         {
             if (state == SceneState.ReadyForTransition)
             {
-                throw new NotImplementedException("transition not wired up yet!");
+                var player = new Player(playerName);
+
+                game.TransitionTo(new PlayScene(game, player));
             }
         }
 

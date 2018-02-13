@@ -15,6 +15,8 @@ namespace Battleship
             {
                 var game = new Game(wrapper, wrapper);
 
+                Console.CancelKeyPress += (s, e) => { e.Cancel = true; game.Quit(); };
+
                 game.Init();
 
                 while (game.State != Game.GameState.Exit)

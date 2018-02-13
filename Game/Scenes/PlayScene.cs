@@ -24,7 +24,16 @@ namespace Battleship.Scenes
 
         protected override void DrawScene(IRenderer renderer)
         {
-            throw new NotImplementedException();
+            renderer.Clear();
+
+            const string content = "Hello, World";
+
+            int x = (renderer.Width / 2) - (content.Length / 2);
+            int y = 0;
+
+            renderer.SetPosition(x, y);
+
+            renderer.Draw("Hello, World!");
         }
 
         public override void HandleInput(IInputHandler inputHandler)

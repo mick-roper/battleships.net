@@ -18,6 +18,11 @@ namespace Battleship
             this.inputHandler = inputHandler ?? throw new ArgumentNullException(nameof(inputHandler));
         }
 
+        internal void Quit()
+        {
+            State = GameState.Exit;
+        }
+
         internal void Cleanup()
         {
             currentScene = null;
