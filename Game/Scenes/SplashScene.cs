@@ -6,22 +6,31 @@ namespace Battleship.Scenes
 {
     class SplashScene : Scene
     {
+        int drawCount = 0;
+
         public SplashScene(Game game) : base(game)
         {
         }
 
         public override void Draw()
         {
-            const string splashMessage = "/t/t/tBattleships!";
+            drawCount = 1;
+
+            const string splashMessage = "Battleships!";
 
             Console.CursorVisible = false;
 
-            var x = game.Rows - (splashMessage.Length / 2);
-            const int y = 5;
+            var x = (game.Columns / 2) - (splashMessage.Length / 2);
+            const int y = 2;
 
             Console.SetCursorPosition(x, y);
 
             Console.Write(splashMessage);
+
+            if (drawCount >= 50) // draw the player select screen
+            {
+
+            }
         }
 
         public override void HandleInput()

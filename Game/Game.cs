@@ -9,17 +9,14 @@ namespace Battleship
     {
         private Scene currentScene;
 
-        public Game(int rows, int columns)
+        public Game()
         {
-            Rows = rows;
-            Columns = columns;
+            Rows = Console.WindowHeight;
+            Columns = Console.WindowWidth;
+        }
 
-            if (rows > Console.LargestWindowHeight) throw new ArgumentOutOfRangeException(nameof(rows), rows, $"value cannot be greater than {Console.LargestWindowHeight}");
-            if (columns > Console.LargestWindowWidth) throw new ArgumentOutOfRangeException(nameof(columns), columns, $"value cannot be greater than {Console.LargestWindowWidth}");
-
-            Console.SetBufferSize(Rows, columns);
-            Console.SetWindowSize(Rows, Columns);
-
+        public void Init()
+        {
             currentScene = new SplashScene(this);
 
             State = GameState.Running;
@@ -51,6 +48,7 @@ namespace Battleship
 
         public enum GameState
         {
+            NotInitialised,
             Running,
             Exit
         }

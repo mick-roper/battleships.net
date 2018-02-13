@@ -9,12 +9,12 @@ namespace Battleship
 
         static void Main(string[] args)
         {
-            const int columns = 100, rows = 25;
-
             try
             {
-                using (var game = new Game(rows, columns))
+                using (var game = new Game())
                 {
+                    game.Init();
+
                     while (game.State != Game.GameState.Exit)
                     {
                         game.Loop();
