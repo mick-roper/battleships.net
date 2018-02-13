@@ -23,6 +23,8 @@ namespace Battleship.Scenes
 
         protected override void DrawScene(IRenderer renderer)
         {
+            renderer.Clear();
+
             DrawGrids(renderer);
 
             switch (state)
@@ -99,19 +101,25 @@ namespace Battleship.Scenes
 
             renderer.SetPosition(x, y);
             renderer.Draw(instruction);
+
+            x = renderer.Width / 2 - 5;
+            y += 1;
+
+            renderer.SetPosition(x, y);
         }
 
         private void DrawGrids(IRenderer renderer)
         {
-            int x = 0, y = 5;
+            int x = 10, y = 7;
 
             renderer.SetColour(ConsoleColor.Cyan);
 
             renderer.SetPosition(x, y);
 
+            // 1: draw player grid
             renderer.Draw(player.MyGrid.ToString());
 
-            // 2: draw right grid
+            // 2: draw target grid
             x = player.MyGrid.Width + 10;
 
             renderer.SetPosition(x, y);

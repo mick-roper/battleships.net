@@ -12,7 +12,6 @@ namespace Battleship
         void SetPosition(int x, int y);
         void Draw(string data);
         void Clear();
-        void SetMinBounds(int x, int y);
         void Commit();
     }
 }
