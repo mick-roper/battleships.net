@@ -37,6 +37,8 @@ namespace Battleship
             }
 
             buffer.Flip();
+
+            Console.SetCursorPosition(x, y);
         }
 
         public void Draw(string data)
