@@ -31,19 +31,24 @@ namespace Battleship
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-
-                Console.Clear();
-
-                Console.SetCursorPosition(0, 0);
-
-                Console.Write("An unrecoverable error occured!!\n\n");
-                Console.Write(ex);
-
-                Console.Write("\n\nPress 'enter' key to exit...");
-
-                Console.ReadKey();
+                HandleException(ex);
             }
+        }
+
+        private static void HandleException(Exception ex)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.Clear();
+
+            Console.SetCursorPosition(0, 0);
+
+            Console.Write("An unrecoverable error occured!!\n\n");
+            Console.Write(ex);
+
+            Console.Write("\n\nPress 'enter' key to exit...");
+
+            Console.ReadKey();
         }
     }
 }
