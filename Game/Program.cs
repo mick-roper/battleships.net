@@ -1,21 +1,41 @@
 ﻿using System;
+using System.Threading;
 
-namespace Game
+namespace Battleship
 {
     class Program
     {
+        const int FRAME_DELAY = 200;
+
         static void Main(string[] args)
         {
-            using (var game = new Game())
+            const int columns = 100, rows = 25;
+
+            try
             {
-                while (game.State != Game.GameState.Exit)
+                using (var game = new Game(rows, columns))
                 {
-                    game.HandleInput();
+                    while (game.State != Game.GameState.Exit)
+                    {
+                        game.Loop();
 
-                    game.Update();
-
-                    game.Draw();
+                        Thread.Sleep(FRAME_DELAY);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+
+                Console.Clear();
+                Console.SetCursorPosition(0, 0);
+
+                Console.Write("An unrecoverable error occured!!\n\n");
+                Console.Write(ex);
+
+                Console.Write("\n\nPress any key to exit...");
+
+                Console.ReadKey();
             }
         }
     }
