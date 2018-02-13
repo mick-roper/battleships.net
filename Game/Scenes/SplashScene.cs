@@ -6,7 +6,8 @@ namespace Battleship.Scenes
 {
     class SplashScene : Scene
     {
-        int drawCount = 0;
+        const byte MAX_DRAWS_BEFORE_TRANSITION = 25;
+        byte drawCount = 0;
 
         public SplashScene(Game game) : base(game)
         {
@@ -14,33 +15,33 @@ namespace Battleship.Scenes
 
         public override void Draw()
         {
-            drawCount = 1;
+            drawCount += 1;
 
-            const string splashMessage = "Battleships!";
+            const string banner = "Battleships!";
 
             Console.CursorVisible = false;
 
-            var x = (game.Columns / 2) - (splashMessage.Length / 2);
+            var x = (game.Columns / 2) - (banner.Length / 2);
             const int y = 2;
 
             Console.SetCursorPosition(x, y);
 
-            Console.Write(splashMessage);
+            Console.Write(banner);
 
-            if (drawCount >= 50) // draw the player select screen
+            if (drawCount >= MAX_DRAWS_BEFORE_TRANSITION) // draw the player select screen
             {
-
+                game.TransitionTo(new PlayerConfigScene(game));
             }
         }
 
         public override void HandleInput()
         {
-            // nothing to handle
+            // do nothing
         }
 
         public override void Update()
         {
-            // nothing to update
+            // do nothing
         }
     }
 }
