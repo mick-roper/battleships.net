@@ -8,43 +8,66 @@ namespace Battleship
     {
         readonly IBuffer buffer;
 
+        int x = 0, y = 0;
+
         public ConsoleRenderer(IBuffer buffer)
         {
             this.buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
         }
 
-        public int Width => throw new NotImplementedException();
+        public int Width => buffer.Width;
 
-        public int Height => throw new NotImplementedException();
+        public int Height => buffer.Height;
 
-        public void ChangeCursorVisibility(bool visible)
-        {
-            throw new NotImplementedException();
-        }
+        public void ChangeCursorVisibility(bool visible) => Console.CursorVisible = visible;
 
         public void Commit()
         {
-            throw new NotImplementedException();
+            for (int row = 0; row < Height; row++)
+            {
+                for (int col = 0; col < Width; col++)
+                {
+                    if (buffer.IsChanged(col, row))
+                    {
+                        Console.SetCursorPosition(col, row);
+
+                        Console.Write(buffer[col, row]);
+                    }
+                }
+            }
+
+            buffer.Flip();
         }
 
         public void Draw(string data)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < data.Length; i++)
+            {
+                char c = data[i];
+
+                if (x > Width)
+                {
+                    x = 0;
+                    y += 1;
+                }
+
+                if (y > Height)
+                {
+                    throw new InvalidOperationException("data is too large to fit in the buffer");
+                }
+
+                buffer.Buffer[x++, y] = c;
+            }
         }
 
-        public void ResetColour()
-        {
-            throw new NotImplementedException();
-        }
+        public void ResetColour() => Console.ResetColor();
 
-        public void SetColour(ConsoleColor colour)
-        {
-            throw new NotImplementedException();
-        }
+        public void SetColour(ConsoleColor colour) => Console.ForegroundColor = colour;
 
         public void SetPosition(int x, int y)
         {
-            throw new NotImplementedException();
+            this.x = x;
+            this.y = y;
         }
     }
 }
