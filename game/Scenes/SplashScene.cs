@@ -30,16 +30,7 @@ namespace Battleships.Scenes
                 isFirstRender = false;
             }
 
-            int messageLength = SPLASH_MESSAGE.Length;
-            int x, y;
-
-            x = (renderer.Width / 2) + (messageLength / 2);
-            y = 1;
-
-            for (int i = 0; i < messageLength; i++)
-            {
-                renderer.Draw(SPLASH_MESSAGE[i], x + i, y);
-            }
+            WriteBannerMessaeg(SPLASH_MESSAGE, renderer);
         }
 
         public override void Update(TimeSpan elapsed)
