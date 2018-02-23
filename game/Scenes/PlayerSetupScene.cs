@@ -8,7 +8,7 @@ namespace Battleships.Scenes
     class PlayerSetupScene : Scene
     {
         bool isFirstRender = true;
-        Player player;
+        bool playerNameInputComplete = false;
 
         StringBuilder playerNameBuilder = new StringBuilder(10);
 
@@ -22,13 +22,11 @@ namespace Battleships.Scenes
             {
                 var c = inputService.ReadChar();
 
-                if (c != '\r')
+                playerNameInputComplete = c == '\r';
+
+                if (!playerNameInputComplete)
                 {
                     playerNameBuilder.Append(c);
-                }
-                else
-                {
-                    player = new Player(playerNameBuilder.ToString());
                 }
             }
         }
@@ -60,9 +58,11 @@ namespace Battleships.Scenes
 
         public override void Update()
         {
-            if (player != null)
+            if (playerNameInputComplete)
             {
-                Game.TransitionTo(new BoardSetupScene(Game));
+                Player player = new Player(playerNameBuilder.ToString());
+                Scene nextScene = new BoardSetupScene(Game, player);
+                Game.TransitionTo(nextScene);
             }
         }
     }
