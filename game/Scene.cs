@@ -14,7 +14,7 @@ namespace Battleships
         protected IGame Game { get; }
 
         public abstract void HandleInput(IInputService inputService);
-        public abstract void Update(int ticks);
+        public abstract void Update(TimeSpan elapsed);
         public abstract void Render(IRenderer renderer);
     }
 }

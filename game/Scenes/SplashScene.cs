@@ -34,7 +34,7 @@ namespace Battleships.Scenes
             }
         }
 
-        public override void Update(int ticks)
+        public override void Update(TimeSpan elapsed)
         {
             // todo: transition to other scene after ticks have elapsed
 

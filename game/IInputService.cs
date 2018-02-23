@@ -6,6 +6,6 @@ namespace Battleships
 {
     interface IInputService
     {
-        string GetInput();
+        string ReadLine();
     }
 }

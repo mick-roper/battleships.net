@@ -6,12 +6,13 @@ namespace Battleships
 {
     sealed class Game : IGame
     {
+        const int MIN_FPS = 1000 / 30;
+
         Scene currentScene;
         IInputService inputService;
         IRenderer renderer;
 
         GameState state;
-        int tickCount;
 
         bool sceneTransitionThisTick = false;
 
@@ -31,14 +32,25 @@ namespace Battleships
 
             state = GameState.Running;
 
+            long t = 0, lastUpdate = GetTicks();
+            TimeSpan elapsed;
+
             do
             {
-                tickCount += 1;
+                t = GetTicks();
+
+                while (t < lastUpdate + MIN_FPS)
+                {
+                    Thread.Sleep(TimeSpan.FromTicks((lastUpdate + MIN_FPS) - t));
+                }
+
+                lastUpdate = GetTicks();
+
                 sceneTransitionThisTick = false;
 
                 currentScene.HandleInput(inputService);
 
-                currentScene.Update(tickCount);
+                currentScene.Update(elapsed);
 
                 if (!sceneTransitionThisTick)
                 {
@@ -61,6 +73,11 @@ namespace Battleships
         public void Exit()
         {
             state = GameState.Exiting;
+        }
+
+        private static long GetTicks()
+        {
+            return DateTime.Now.Ticks;
         }
 
         enum GameState
