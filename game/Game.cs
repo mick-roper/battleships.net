@@ -33,31 +33,20 @@ namespace Battleships
 
             state = GameState.Running;
 
-            long t = 0, delay = 0, lastUpdate = GetTicks();
-
             do
             {
-                t = GetTicks();
-                delay = lastUpdate + MIN_WAIT_TICKS;
-
-                // calculate delay
-                if (t < delay)
-                {
-                    Thread.Sleep(TimeSpan.FromTicks(delay - t));
-                }
-
-                lastUpdate = GetTicks();
-
                 sceneTransitionThisTick = false;
 
                 currentScene.HandleInput(inputService);
 
-                currentScene.Update(TimeSpan.FromTicks(lastUpdate - t));
+                currentScene.Update();
 
                 if (!sceneTransitionThisTick)
                 {
                     currentScene.Render(renderer); 
                 }
+
+                Thread.Sleep(MIN_WAIT_TICKS);
             }
             while (state != GameState.Exiting);
 

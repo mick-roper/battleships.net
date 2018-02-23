@@ -6,19 +6,33 @@ namespace Battleships.Scenes
 {
     class PlayerSetupScene : Scene
     {
+        bool isFirstRender = true;
+
+        public PlayerSetupScene(IGame game) : base(game)
+        {
+        }
+
         public override void HandleInput(IInputService inputService)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public override void Render(IRenderer renderer)
         {
-            throw new NotImplementedException();
+            renderer.ShowCursor(false);
+
+            if (isFirstRender)
+            {
+                renderer.Clear();
+                isFirstRender = false;
+            }
+
+            WriteBanner("Player Setup", renderer);
         }
 
-        public override void Update(TimeSpan elapsed)
+        public override void Update()
         {
-            throw new NotImplementedException();
+            return;
         }
     }
 }

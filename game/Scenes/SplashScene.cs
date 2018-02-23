@@ -6,10 +6,12 @@ namespace Battleships.Scenes
 {
     class SplashScene : Scene
     {
-        const int MAX_TICKS = 25;
+        const int DISPLAY_FOR_TICKS = 25;
         const string SPLASH_MESSAGE = "Battleships!";
 
         bool isFirstRender = true;
+
+        int tickCount;
 
         public SplashScene(IGame game) : base(game)
         {
@@ -30,14 +32,15 @@ namespace Battleships.Scenes
                 isFirstRender = false;
             }
 
-            WriteBannerMessaeg(SPLASH_MESSAGE, renderer);
+            WriteBanner(SPLASH_MESSAGE, renderer);
         }
 
-        public override void Update(TimeSpan elapsed)
+        public override void Update()
         {
-            // todo: transition to other scene after ticks have elapsed
-
-            return;
+            if ((tickCount += 1) >= DISPLAY_FOR_TICKS)
+            {
+                Game.TransitionTo(new PlayerSetupScene(Game));
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Battleships
         /// <param name="message">The message</param>
         /// <param name="renderer">The renderer</param>
         /// <param name="y">The optional 'y' coord</param>
-        protected void WriteBannerMessaeg(string message, IRenderer renderer, int y = 1)
+        protected void WriteBanner(string message, IRenderer renderer, int y = 1)
         {
             int messageLength = message.Length;
 
@@ -39,8 +39,7 @@ namespace Battleships
         /// <summary>
         /// Updates the scene
         /// </summary>
-        /// <param name="elapsed">The amount of time since the last update</param>
-        public abstract void Update(TimeSpan elapsed);
+        public abstract void Update();
         /// <summary>
         /// Renders the scene
         /// </summary>
