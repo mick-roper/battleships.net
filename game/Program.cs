@@ -9,9 +9,22 @@ namespace Battleships
             IInputService inputService = null;
             IRenderer renderer = null;
 
-            var game = new Game(inputService, renderer);
+            int exitCode;
 
-            return game.Run();
+            try
+            {
+                var game = new Game(inputService, renderer);
+
+                exitCode = game.Run();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+
+                exitCode = ExitCodes.ERROR;
+            }
+
+            return exitCode;
         }
     }
 }

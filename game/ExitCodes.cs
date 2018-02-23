@@ -7,6 +7,7 @@ namespace Battleships
     static class ExitCodes
     {
         public const byte OK = 0;
-        public const byte NOT_INITIALISED = 1;
+        public const byte ERROR = 1;
+        public const byte NOT_INITIALISED = 100;
     }
 }
