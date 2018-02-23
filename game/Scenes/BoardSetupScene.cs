@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Battleships.Scenes
 {
-    class BoardSetupScene : Scene
+    class BoardSetupScene : GridScene
     {
         Player player;
 
@@ -35,8 +35,9 @@ namespace Battleships.Scenes
 
             int x = 5, y = 5;
 
-            player.Board.Render(x, y, renderer);
+            RenderGrid(player.Grid, x, y, renderer);
         }
+
 
         public override void Update()
         {

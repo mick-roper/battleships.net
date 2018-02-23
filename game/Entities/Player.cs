@@ -11,7 +11,7 @@ namespace Battleships.Entities
             Name = name;
         }
 
-        public GameBoard Board { get; } = new GameBoard();
+        public Grid Grid { get; } = new Grid();
         public string Name { get; }
     }
 }
