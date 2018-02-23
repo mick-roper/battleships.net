@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleships.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,23 +7,26 @@ namespace Battleships.Scenes
 {
     class BoardSetupScene : Scene
     {
-        public BoardSetupScene(IGame game) : base(game)
+        Player player;
+
+        public BoardSetupScene(IGame game, Player player) : base(game)
         {
+            this.player = player;
         }
 
         public override void HandleInput(IInputService inputService)
         {
-            throw new NotImplementedException();
+            return; // for now, do nothing
         }
 
         public override void Render(IRenderer renderer)
         {
-            throw new NotImplementedException();
+            return; // draw the grid with pieces
         }
 
         public override void Update()
         {
-            throw new NotImplementedException();
+            return; // update the players board
         }
     }
 }
