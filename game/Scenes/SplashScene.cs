@@ -32,7 +32,7 @@ namespace Battleships.Scenes
                 isFirstRender = false;
             }
 
-            WriteBanner(SPLASH_MESSAGE, renderer);
+            WriteCentral(SPLASH_MESSAGE, renderer);
         }
 
         public override void Update()

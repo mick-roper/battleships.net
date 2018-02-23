@@ -6,9 +6,9 @@ namespace Battleships
 {
     public class ConsoleInputService : IInputService
     {
-        public string ReadLine()
+        public char ReadChar()
         {
-            return Console.ReadLine();
+            return Console.ReadKey().KeyChar;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleships.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,6 +8,10 @@ namespace Battleships.Scenes
     class PlayerSetupScene : Scene
     {
         bool isFirstRender = true;
+        bool inputComplete = false;
+        Player player;
+
+        StringBuilder playerNameBuilder = new StringBuilder(10);
 
         public PlayerSetupScene(IGame game) : base(game)
         {
@@ -14,7 +19,21 @@ namespace Battleships.Scenes
 
         public override void HandleInput(IInputService inputService)
         {
-            return;
+            if (!isFirstRender)
+            {
+                var c = inputService.ReadChar();
+
+                inputComplete = c != '\n';
+
+                if (inputComplete)
+                {
+                    player = new Player(playerNameBuilder.ToString());
+                }
+                else
+                {
+                    playerNameBuilder.Append(c);
+                }
+            }
         }
 
         public override void Render(IRenderer renderer)
@@ -27,12 +46,27 @@ namespace Battleships.Scenes
                 isFirstRender = false;
             }
 
-            WriteBanner("Player Setup", renderer);
+            int y = 1;
+
+            WriteCentral("Player Setup", renderer, y);
+
+            y = 3;
+
+            WriteCentral("Enter your name", renderer, y);
+
+            y = 5;
+
+            WriteCentral(playerNameBuilder.ToString(), renderer, y);
+
+            renderer.ShowCursor(true);
         }
 
         public override void Update()
         {
-            return;
+            if (player != null)
+            {
+                Game.TransitionTo(new BoardSetupScene(Game));
+            }
         }
     }
 }

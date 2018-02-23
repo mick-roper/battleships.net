@@ -19,7 +19,7 @@ namespace Battleships
         /// <param name="message">The message</param>
         /// <param name="renderer">The renderer</param>
         /// <param name="y">The optional 'y' coord</param>
-        protected void WriteBanner(string message, IRenderer renderer, int y = 1)
+        protected void WriteCentral(string message, IRenderer renderer, int y = 1)
         {
             int messageLength = message.Length;
 
