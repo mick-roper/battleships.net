@@ -9,6 +9,8 @@ namespace Battleships.Scenes
     {
         Player player;
 
+        bool isFirstRender = true;
+
         public BoardSetupScene(IGame game, Player player) : base(game)
         {
             this.player = player;
@@ -21,7 +23,19 @@ namespace Battleships.Scenes
 
         public override void Render(IRenderer renderer)
         {
-            return; // draw the grid with pieces
+            renderer.ShowCursor(false);
+
+            if (isFirstRender)
+            {
+                renderer.Clear();
+                isFirstRender = false;
+            }
+
+            WriteCentral("Place your pieces...", renderer);
+
+            int x = 5, y = 5;
+
+            player.Board.Render(x, y, renderer);
         }
 
         public override void Update()
