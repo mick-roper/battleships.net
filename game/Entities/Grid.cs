@@ -6,7 +6,7 @@ namespace Battleships.Entities
 {
     class Grid
     {
-        const char X_AXIS_OFFSET = 'A', Y_AXIS_OFFSET = '0';
+        public const char X_AXIS_OFFSET = 'A', Y_AXIS_OFFSET = '0';
 
         readonly IDictionary<Coordinate, Tile> tiles = new Dictionary<Coordinate, Tile>(BOUNDARY * BOUNDARY);
 

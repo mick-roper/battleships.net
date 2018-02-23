@@ -31,7 +31,7 @@ namespace Battleships.Scenes
                 isFirstRender = false;
             }
 
-            WriteCentral("Place your pieces...", renderer);
+            WriteCentral($"{player.Name} - place your pieces", renderer);
 
             int x = 5, y = 5;
 
