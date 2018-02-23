@@ -6,9 +6,9 @@ namespace Battleships.Entities
 {
     class GameBoard
     {
-        const char X_AXIS_SEED = 'A', Y_AXIS_SEED = '1';
+        const char X_AXIS_OFFSET = 'A', Y_AXIS_OFFSET = '0';
 
-        readonly IDictionary<Tuple<char, byte>, Tile> tiles = new Dictionary<Tuple<char, byte>, Tile>(BOUNDARY * BOUNDARY);
+        readonly IDictionary<Tuple<char, char>, Tile> tiles = new Dictionary<Tuple<char, char>, Tile>(BOUNDARY * BOUNDARY);
 
         const byte BOUNDARY = 10;
 
@@ -16,9 +16,10 @@ namespace Battleships.Entities
         {
             for (byte y = 0; y < BOUNDARY; y++)
             {
-                for (char x = X_AXIS_SEED; x < X_AXIS_SEED + BOUNDARY; x++)
+                for (byte x = 0; x < BOUNDARY; x++)
                 {
-                    tiles[new Tuple<char, byte>(x, y)] = Tile.Sea;
+                    var t = new Tuple<char, char>(ToXChar(x), ToYChar(y));
+                    tiles[t] = Tile.Sea;
                 }
             }
         }
@@ -35,14 +36,14 @@ namespace Battleships.Entities
                 {
                     renderState = ComputeRenderState(x, y);
 
-                    char charToDraw = ComputeCharToDraw(renderState, x, y);
+                    char charToDraw = ComputeCharToDraw(renderState, ToXChar(x), ToYChar(y));
 
                     renderer.Draw(charToDraw, left + x, top + y);
                 }
             }
         }
 
-        private char ComputeCharToDraw(BoardRenderState renderState, byte x, byte y)
+        private char ComputeCharToDraw(BoardRenderState renderState, char x, char y)
         {
             switch (renderState)
             {
@@ -52,11 +53,11 @@ namespace Battleships.Entities
                     }
                 case BoardRenderState.Axis_X:
                     {
-                        return (char)(x + X_AXIS_SEED);
+                        return (char)(x + X_AXIS_OFFSET);
                     }
                 case BoardRenderState.Axis_Y:
                     {
-                        return (char)(y + Y_AXIS_SEED);
+                        return (char)(y + Y_AXIS_OFFSET);
                     }
                 case BoardRenderState.Grid_Corner:
                     {
@@ -72,7 +73,7 @@ namespace Battleships.Entities
                     }
                 case BoardRenderState.Tile:
                     {
-                        var tile = tiles[new Tuple<char, byte>((char)(x + X_AXIS_SEED), y)];
+                        var tile = tiles[new Tuple<char, char>(x, y)];
                         return TileMap.GetCharacterFor(tile);
                     }
                 default:
@@ -114,6 +115,16 @@ namespace Battleships.Entities
         private static bool IsEven(byte n)
         {
             return n % 2 == 0;
+        }
+
+        private static char ToXChar(byte x)
+        {
+            return (char)(x + X_AXIS_OFFSET);
+        }
+
+        private static char ToYChar(byte y)
+        {
+            return (char)(y + Y_AXIS_OFFSET);
         }
 
         enum BoardRenderState
