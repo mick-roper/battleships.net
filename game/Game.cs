@@ -6,7 +6,7 @@ namespace Battleships
 {
     sealed class Game : IGame
     {
-        const int MAX_UPDATES_PER_SECOND = 10;
+        const int MAX_UPDATES_PER_SECOND = 5;
         const int MIN_WAIT_TICKS = 1000 / MAX_UPDATES_PER_SECOND;
 
         Scene currentScene;
@@ -56,8 +56,6 @@ namespace Battleships
 
                 if (!sceneTransitionThisTick)
                 {
-                    renderer.Clear();
-
                     currentScene.Render(renderer); 
                 }
             }

@@ -9,6 +9,8 @@ namespace Battleships.Scenes
         const int MAX_TICKS = 25;
         const string SPLASH_MESSAGE = "Battleships!";
 
+        bool isFirstRender = true;
+
         public SplashScene(IGame game) : base(game)
         {
         }
@@ -21,6 +23,12 @@ namespace Battleships.Scenes
         public override void Render(IRenderer renderer)
         {
             renderer.ShowCursor(false);
+
+            if (isFirstRender)
+            {
+                renderer.Clear();
+                isFirstRender = false;
+            }
 
             int messageLength = SPLASH_MESSAGE.Length;
             int x, y;
