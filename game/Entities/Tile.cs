@@ -6,7 +6,7 @@ namespace Battleships.Entities
 {
     enum Tile
     {
-        Sea,
+        Water,
         Destroyer,
         Frigate,
         Cruiser,

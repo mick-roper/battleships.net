@@ -19,7 +19,7 @@ namespace Battleships.Entities
                 for (byte x = 0; x < BOUNDARY; x++)
                 {
                     var t = new Coordinate(ToXChar(x), ToYChar(y));
-                    tiles[t] = Tile.Sea;
+                    tiles[t] = Tile.Water;
                 }
             }
         }

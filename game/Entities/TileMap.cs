@@ -7,7 +7,7 @@ namespace Battleships.Entities
     static class TileMap
     {
         static readonly IDictionary<Tile, char> tileMap = new Dictionary<Tile, char> {
-            [Tile.Sea] = '~',
+            [Tile.Water] = '~',
             [Tile.Shot_Hit] = 'O',
             [Tile.Shot_Miss] = 'X',
             [Tile.Battleship] = '#',
