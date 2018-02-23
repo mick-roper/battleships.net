@@ -8,9 +8,9 @@ namespace Battleships
     {
         readonly object syncroot = new object();
 
-        public int Width => Console.BufferWidth;
+        public int Width => Console.WindowWidth;
 
-        public int Height => Console.BufferHeight;
+        public int Height => Console.WindowHeight;
 
         public void Clear()
         {
@@ -26,6 +26,14 @@ namespace Battleships
             {
                 Console.SetCursorPosition(x, y);
                 Console.Write(character);
+            }
+        }
+
+        public void SetPosition(int x, int y)
+        {
+            lock (syncroot)
+            {
+                Console.SetCursorPosition(x, y);
             }
         }
 

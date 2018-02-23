@@ -8,7 +8,6 @@ namespace Battleships.Scenes
     class PlayerSetupScene : Scene
     {
         bool isFirstRender = true;
-        bool inputComplete = false;
         Player player;
 
         StringBuilder playerNameBuilder = new StringBuilder(10);
@@ -23,15 +22,13 @@ namespace Battleships.Scenes
             {
                 var c = inputService.ReadChar();
 
-                inputComplete = c != '\n';
-
-                if (inputComplete)
+                if (c != '\r')
                 {
-                    player = new Player(playerNameBuilder.ToString());
+                    playerNameBuilder.Append(c);
                 }
                 else
                 {
-                    playerNameBuilder.Append(c);
+                    player = new Player(playerNameBuilder.ToString());
                 }
             }
         }
@@ -56,7 +53,7 @@ namespace Battleships.Scenes
 
             y = 5;
 
-            WriteCentral(playerNameBuilder.ToString(), renderer, y);
+            renderer.SetPosition((renderer.Width / 2) + playerNameBuilder.Length, y);
 
             renderer.ShowCursor(true);
         }
