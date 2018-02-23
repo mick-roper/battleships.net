@@ -6,15 +6,15 @@ namespace Battleships
 {
     abstract class Scene
     {
-        public Scene(ISceneManager sceneManager)
+        public Scene(IGame sceneManager)
         {
             SceneManager = sceneManager;
         }
 
-        protected ISceneManager SceneManager { get; }
+        protected IGame SceneManager { get; }
 
-        public abstract void HandleInput();
-        public abstract void Update();
+        public abstract void HandleInput(IInputService inputService);
+        public abstract void Update(int ticks);
         public abstract void Render(IRenderer renderer);
     }
 }

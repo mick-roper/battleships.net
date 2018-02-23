@@ -3,17 +3,21 @@ using System.Threading;
 
 namespace Battleships
 {
-    sealed class Game
+    sealed class Game : IGame
     {
-        GameState state;
         Scene currentScene;
+        IInputService inputService;
+        IRenderer renderer;
+
+        GameState state;
         int tickCount;
 
-        public Game()
-        {
-            state = GameState.Initialising;
+        bool sceneTransitionThisTick = false;
 
-            // todo: setup stuff
+        public Game(IInputService inputService, IRenderer renderer, Scene initialScene)
+        {
+            currentScene = initialScene ?? throw new ArgumentNullException(nameof(initialScene));
+
 
             state = GameState.Initialised;
         }
@@ -24,18 +28,36 @@ namespace Battleships
 
             state = GameState.Running;
 
-            while (state != GameState.Exiting)
+            do
             {
-                currentScene.HandleInput();
+                tickCount += 1;
+                sceneTransitionThisTick = false;
 
+                currentScene.HandleInput(inputService);
 
+                currentScene.Update(tickCount);
+
+                if (!sceneTransitionThisTick)
+                {
+                    currentScene.Render(renderer); 
+                }
 
                 Thread.Sleep(200);
-
-                tickCount += 1;
             }
+            while (state != GameState.Exiting);
 
             return ExitCodes.OK;
+        }
+
+        public void TransitionTo(Scene scene)
+        {
+            currentScene = scene;
+            sceneTransitionThisTick = true;
+        }
+
+        public void Exit()
+        {
+            state = GameState.Exiting;
         }
 
         enum GameState
@@ -43,7 +65,7 @@ namespace Battleships
             Initialising,
             Initialised,
             Running,
-            Exiting,
+            Exiting
         }
     }
 }
