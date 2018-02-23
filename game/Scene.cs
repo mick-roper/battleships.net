@@ -6,12 +6,12 @@ namespace Battleships
 {
     abstract class Scene
     {
-        public Scene(IGame sceneManager)
+        public Scene(IGame game)
         {
-            SceneManager = sceneManager;
+            Game = game;
         }
 
-        protected IGame SceneManager { get; }
+        protected IGame Game { get; }
 
         public abstract void HandleInput(IInputService inputService);
         public abstract void Update(int ticks);

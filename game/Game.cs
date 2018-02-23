@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleships.Scenes;
+using System;
 using System.Threading;
 
 namespace Battleships
@@ -14,10 +15,12 @@ namespace Battleships
 
         bool sceneTransitionThisTick = false;
 
-        public Game(IInputService inputService, IRenderer renderer, Scene initialScene)
+        public Game(IInputService inputService, IRenderer renderer)
         {
-            currentScene = initialScene ?? throw new ArgumentNullException(nameof(initialScene));
+            this.inputService = inputService ?? throw new ArgumentNullException(nameof(inputService));
+            this.renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
 
+            currentScene = new SplashScene(this);
 
             state = GameState.Initialised;
         }

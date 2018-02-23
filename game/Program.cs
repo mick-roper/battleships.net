@@ -6,7 +6,10 @@ namespace Battleships
     {
         static int Main(string[] args)
         {
-            var game = new Game();
+            IInputService inputService = null;
+            IRenderer renderer = null;
+
+            var game = new Game(inputService, renderer);
 
             return game.Run();
         }
