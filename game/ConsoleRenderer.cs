@@ -8,9 +8,17 @@ namespace Battleships
     {
         readonly object syncroot = new object();
 
-        public int Width => Console.WindowWidth;
+        public int Width => Console.BufferWidth;
 
-        public int Height => Console.WindowHeight;
+        public int Height => Console.BufferHeight;
+
+        public void Clear()
+        {
+            lock (syncroot)
+            {
+                Console.Clear(); 
+            }
+        }
 
         public void Draw(char character, int x, int y)
         {

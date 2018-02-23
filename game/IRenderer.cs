@@ -26,5 +26,6 @@ namespace Battleships
         /// </summary>
         /// <param name="visible"><c>true</c> to show the cursor, else <c>false</c></param>
         void ShowCursor(bool visible);
+        void Clear();
     }
 }

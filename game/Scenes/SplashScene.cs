@@ -30,7 +30,7 @@ namespace Battleships.Scenes
 
             for (int i = 0; i < messageLength; i++)
             {
-                renderer.Draw(SPLASH_MESSAGE[i], x += i, y);
+                renderer.Draw(SPLASH_MESSAGE[i], x + i, y);
             }
         }
 

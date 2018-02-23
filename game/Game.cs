@@ -6,7 +6,8 @@ namespace Battleships
 {
     sealed class Game : IGame
     {
-        const int MIN_FPS = 1000 / 30;
+        const int MAX_UPDATES_PER_SECOND = 10;
+        const int MIN_WAIT_TICKS = 1000 / MAX_UPDATES_PER_SECOND;
 
         Scene currentScene;
         IInputService inputService;
@@ -32,16 +33,17 @@ namespace Battleships
 
             state = GameState.Running;
 
-            long t = 0, lastUpdate = GetTicks();
-            TimeSpan elapsed;
+            long t = 0, delay = 0, lastUpdate = GetTicks();
 
             do
             {
                 t = GetTicks();
+                delay = lastUpdate + MIN_WAIT_TICKS;
 
-                while (t < lastUpdate + MIN_FPS)
+                // calculate delay
+                if (t < delay)
                 {
-                    Thread.Sleep(TimeSpan.FromTicks((lastUpdate + MIN_FPS) - t));
+                    Thread.Sleep(TimeSpan.FromTicks(delay - t));
                 }
 
                 lastUpdate = GetTicks();
@@ -50,14 +52,14 @@ namespace Battleships
 
                 currentScene.HandleInput(inputService);
 
-                currentScene.Update(elapsed);
+                currentScene.Update(TimeSpan.FromTicks(lastUpdate - t));
 
                 if (!sceneTransitionThisTick)
                 {
+                    renderer.Clear();
+
                     currentScene.Render(renderer); 
                 }
-
-                Thread.Sleep(200);
             }
             while (state != GameState.Exiting);
 

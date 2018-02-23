@@ -6,8 +6,8 @@ namespace Battleships
     {
         static int Main(string[] args)
         {
-            IInputService inputService = null;
-            IRenderer renderer = null;
+            IInputService inputService = new ConsoleInputService();
+            IRenderer renderer = new ConsoleRenderer();
 
             int exitCode;
 
