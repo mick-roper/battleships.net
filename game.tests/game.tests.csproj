@@ -22,4 +22,8 @@
     <ProjectReference Include="..\game\game.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Scenes\" />
+  </ItemGroup>
+
 </Project>
