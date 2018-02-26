@@ -33,11 +33,22 @@ namespace Battleships.Scenes
 
             WriteCentral($"{player.Name} - place your pieces", renderer);
 
-            int x = 5, y = 5;
+            int x = 0, y = 5;
 
-            RenderGrid(player.Grid, x, y, renderer);
+            DrawGrid(player.Grid, x, y);
+
+            DrawInstruction(x + 30, y);
         }
 
+        private void DrawInstruction(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DrawGrid(Grid grid, int x, int y)
+        {
+            throw new NotImplementedException();
+        }
 
         public override void Update()
         {

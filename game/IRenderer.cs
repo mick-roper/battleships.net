@@ -26,7 +26,15 @@ namespace Battleships
         /// </summary>
         /// <param name="visible"><c>true</c> to show the cursor, else <c>false</c></param>
         void ShowCursor(bool visible);
+        /// <summary>
+        /// Clears the current display
+        /// </summary>
         void Clear();
+        /// <summary>
+        /// Sets the current position
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         void SetPosition(int x, int y);
     }
 }
